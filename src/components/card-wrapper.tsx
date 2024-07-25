@@ -29,7 +29,7 @@ export const CardWrapper = ({
       <CardContent>{children}</CardContent>
 
       {showSocial && (
-        <CardFooter>
+        <CardFooter className="grid w-full">
           <Socials />
         </CardFooter>
       )}
