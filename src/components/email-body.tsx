@@ -23,14 +23,13 @@ interface EmailProps {
 export const EmailBody = ({ href, name }: EmailProps) => (
   <Html>
     <Head />
-    <Preview>The sales intelligence platform that helps you uncover qualified leads.</Preview>
+    <Preview>AuthJS the best NextJs auth solution</Preview>
     <Body style={main}>
       <Container style={container}>
         <Header label="AuthJS" />
         <Text style={paragraph}>Hi {name}</Text>
         <Text style={paragraph}>
-          Welcome to Koala, the sales intelligence platform that helps you uncover qualified leads
-          and close deals faster.
+          Welcome to AuthJs the all in one auth solution for SAAS founders and fast shippers
         </Text>
         <Section style={btnContainer}>
           <Link

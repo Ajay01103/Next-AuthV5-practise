@@ -1,10 +1,9 @@
 "use client"
 
 import { CardWrapper } from "./card-wrapper"
-import { LoginSchema } from "@/schemas"
+import { NewPasswordSchema } from "@/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState, useTransition } from "react"
-import { useSearchParams } from "next/navigation"
 
 import {
   Form,
@@ -17,37 +16,33 @@ import {
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { Input } from "./ui/input"
-import { Button, buttonVariants } from "./ui/button"
+import { Button } from "./ui/button"
 import { FormError } from "./form/form-error"
 import { FormSuccess } from "./form/form-success"
-import { login } from "@/actions/login"
-import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { newPassword } from "@/actions/new-password"
 
-export const LoginForm = () => {
+export const NewPasswordForm = () => {
   const searchParams = useSearchParams()
-  const urlError =
-    searchParams.get("error") === "OAuthAccountNotLinked"
-      ? "Email already used with different provider"
-      : ""
+  const token = searchParams.get("token")
   const [isPending, startTransition] = useTransition()
 
   const [error, setError] = useState<string | undefined>("")
   const [success, setSuccess] = useState<string | undefined>("")
 
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const form = useForm<z.infer<typeof NewPasswordSchema>>({
+    resolver: zodResolver(NewPasswordSchema),
     defaultValues: {
-      email: "",
       password: "",
     },
   })
 
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit = (values: z.infer<typeof NewPasswordSchema>) => {
     setError("")
     setSuccess("")
 
     startTransition(() => {
-      login(values).then((data) => {
+      newPassword(values, token).then((data) => {
         setError(data?.error)
         setSuccess(data?.success)
       })
@@ -57,10 +52,9 @@ export const LoginForm = () => {
   return (
     <div className="flex flex-col min-h-screen items-center justify-center">
       <CardWrapper
-        headerLabel="Welcome Back!"
-        backButtonLabel="Dont have an account ?"
-        backButtonHref="/auth/register"
-        showSocial
+        headerLabel="Set your new assword"
+        backButtonLabel="Back to Login"
+        backButtonHref="/auth/login"
       >
         <Form {...form}>
           <form
@@ -70,30 +64,10 @@ export const LoginForm = () => {
             <div className="space-y-4">
               <FormField
                 control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="joe@gmail.com"
-                        type="email"
-                      />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>New Password</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -102,23 +76,13 @@ export const LoginForm = () => {
                       />
                     </FormControl>
 
-                    <Link
-                      className={buttonVariants({
-                        variant: "link",
-                        className: "font-normal px-0",
-                      })}
-                      href="/auth/reset"
-                    >
-                      Forgot your password ?
-                    </Link>
-
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
 
-            <FormError message={error || urlError} />
+            <FormError message={error} />
             <FormSuccess message={success} />
 
             <Button
@@ -127,7 +91,7 @@ export const LoginForm = () => {
               type="submit"
               size="default"
             >
-              Login
+              Confirm Password
             </Button>
           </form>
         </Form>
