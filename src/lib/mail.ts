@@ -1,4 +1,5 @@
-import { EmailBody, EmailBodyHtml } from "@/components/email-body"
+import { TwoFactorEmailHtml } from "@/components/2fa-code-email"
+import { EmailBodyHtml } from "@/components/email-body"
 import { ResetEmailHtml } from "@/components/reset-email"
 import nodemailer from "nodemailer"
 
@@ -38,5 +39,18 @@ export const sendPasswordResetEmail = async (email: string, token: string) => {
     to: email,
     subject: "Reset your Password",
     html: ResetEmailHtml(emailProps),
+  })
+}
+
+export const sendTwoFactorTokenEmail = async (email: string, token: string) => {
+  const TwoFactorProps = {
+    TwoFactorcode: token,
+  }
+
+  await transporter.sendMail({
+    from: process.env.GMAIL_USER,
+    to: email,
+    subject: "Two Factor Auth PIN",
+    html: TwoFactorEmailHtml(TwoFactorProps),
   })
 }

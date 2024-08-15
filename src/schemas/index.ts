@@ -3,6 +3,7 @@ import * as z from "zod"
 export const LoginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(2, { message: "Too short password" }),
+  code: z.optional(z.string()),
 })
 
 export const ResetSchema = z.object({
