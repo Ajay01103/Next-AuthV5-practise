@@ -1,25 +1,36 @@
-import { auth, signOut } from "@/auth"
-import { Button } from "@/components/ui/button"
+"use client"
 
-const SettingsPage = async () => {
-  const session = await auth()
+import { logout } from "@/actions/logout"
+import { Button } from "@/components/ui/button"
+import { useCurrentUser } from "@/hooks/use-current-user"
+import { signOut } from "next-auth/react"
+
+//this is how we protect client component in Authjs
+
+const SettingsPage = () => {
+  const user = useCurrentUser()
+
+  // logout at client side or client level
+  const onClick = () => {
+    signOut()
+  }
+
+  //logout at server side and as well as client side
+  // const onClick = async () => {
+  //   logout()
+  // }
+
   return (
     <div>
-      {JSON.stringify(session)}
-      <form
-        action={async () => {
-          "use server"
+      <div className="bg-white py-10 rounded-xl"></div>
 
-          await signOut()
-        }}
+      <Button
+        onClick={onClick}
+        type="submit"
+        variant="destructive"
       >
-        <Button
-          type="submit"
-          variant="destructive"
-        >
-          Logout
-        </Button>
-      </form>
+        Logout
+      </Button>
     </div>
   )
 }
