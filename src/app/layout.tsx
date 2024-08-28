@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { DM_Sans } from "next/font/google"
 import "./globals.css"
 import { cn } from "@/lib/utils"
+import { Toaster } from "@/components/ui/sonner"
 
 import { SessionProvider } from "next-auth/react"
 import { auth } from "@/auth"
@@ -23,6 +24,10 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="en">
         <body className={cn("min-h-screen bg-background font-sans antialiased", inter.variable)}>
+          <Toaster
+            position="top-center"
+            richColors
+          />
           {children}
         </body>
       </html>

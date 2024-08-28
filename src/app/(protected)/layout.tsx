@@ -18,7 +18,7 @@ const ProtectedLayout = ({ children }: ProptectedLayoutProps) => {
   return (
     <div
       style={divStyle}
-      className="h-full w-full flex flex-col gap-y-10 items-center justify-center"
+      className="min-h-screen w-full flex flex-col gap-y-10 items-center justify-center"
     >
       <Navbar />
       {children}

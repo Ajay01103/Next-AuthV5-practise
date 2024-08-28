@@ -2832,6 +2832,7 @@ __metadata:
     react-email: "npm:2.1.5"
     react-hook-form: "npm:^7.52.1"
     react-icons: "npm:^5.2.1"
+    sonner: "npm:^1.5.0"
     tailwind-merge: "npm:^2.4.0"
     tailwindcss: "npm:^3.4.1"
     tailwindcss-animate: "npm:^1.0.7"
@@ -7218,6 +7219,16 @@ __metadata:
     react: ^18.0.0
     react-dom: ^18.0.0
   checksum: 10c0/324d2b2edb8bf15a38239f67e533bbf9f38425adf432c9542e7a9610b7451ec5d4082d2e8ddb564096f63f44ba7ec4d2e137f8b0af1786a0becac346fae2b28a
+  languageName: node
+  linkType: hard
+
+"sonner@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "sonner@npm:1.5.0"
+  peerDependencies:
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 10c0/9561b5861bede7f874cc442e447a68c8bfa6e4eadad603bc04e38db35a8b8108741f595a12c9856742062bae230ffedf73122015940491f482c5aa9e68ee85e0
   languageName: node
   linkType: hard
 
